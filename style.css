@@ -1,0 +1,180 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --light-bg: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 2rem 0;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.summary-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+    height: 100%;
+    border: none;
+    margin-bottom: 1.5rem;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+}
+
+.summary-card .card-header {
+    font-weight: 600;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.time-display {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+}
+
+.positive-time {
+    color: var(--success-color);
+}
+
+.negative-time {
+    color: var(--danger-color);
+}
+
+.neutral-time {
+    color: var(--primary-color);
+}
+
+.data-table {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.data-table thead {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.data-table th {
+    font-weight: 600;
+    border: none;
+}
+
+.data-table tbody tr:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+.week-row {
+    background-color: rgba(241, 196, 15, 0.1) !important;
+    font-weight: 600;
+}
+
+.holiday {
+    background-color: rgba(231, 76, 60, 0.1) !important;
+}
+
+.no-work {
+    background-color: rgba(149, 165, 166, 0.1) !important;
+}
+
+.footer {
+    margin-top: 2rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid #dee2e6;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+    margin-bottom: 1.5rem;
+}
+
+.nav-tabs .nav-link {
+    color: #495057;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    margin-right: 5px;
+    padding: 0.5rem 1rem;
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--secondary-color);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    background-color: white;
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+.annual-summary-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.annual-total {
+    background-color: rgba(52, 152, 219, 0.1) !important;
+    font-weight: 700;
+}
+
+.quarter-divider {
+    background-color: rgba(149, 165, 166, 0.1) !important;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .time-display {
+        font-size: 1.4rem;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .nav-tabs .nav-link {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.9rem;
+    }
+}
+
+.chart-container {
+    height: 300px;
+    margin-bottom: 2rem;
+}

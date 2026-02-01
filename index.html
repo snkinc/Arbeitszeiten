@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gleitzeit-Dashboard - Siun Diefenbach - 2026</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <!-- Eigene CSS-Datei -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Chart.js für Diagramme -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header mit Titel und Personendaten -->
+        <div class="header text-center">
+            <h1><i class="bi bi-calendar-check"></i> Gleitzeit-Dashboard 2026</h1>
+            <h2>Siun Diefenbach</h2>
+            <p class="lead mt-3">24-Stunden-Woche (Montag, Dienstag, Mittwoch)</p>
+            <div class="alert alert-info mt-3" role="alert">
+                <i class="bi bi-info-circle"></i> <strong>Hinweis:</strong> Dieses Dashboard zeigt Musterdaten für 2026. Sie können die Daten einfach in der <code>data.js</code>-Datei aktualisieren.
+            </div>
+        </div>
+        
+        <!-- Tabs für Monate und Jahresübersicht -->
+        <ul class="nav nav-tabs" id="yearTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="year-summary-tab" data-bs-toggle="tab" data-bs-target="#year-summary" type="button" role="tab">
+                    <i class="bi bi-bar-chart"></i> Jahresübersicht
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="january-tab" data-bs-toggle="tab" data-bs-target="#january" type="button" role="tab">
+                    Januar
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="february-tab" data-bs-toggle="tab" data-bs-target="#february" type="button" role="tab">
+                    Februar
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="march-tab" data-bs-toggle="tab" data-bs-target="#march" type="button" role="tab">
+                    März
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="april-tab" data-bs-toggle="tab" data-bs-target="#april" type="button" role="tab">
+                    April
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="may-tab" data-bs-toggle="tab" data-bs-target="#may" type="button" role="tab">
+                    Mai
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="june-tab" data-bs-toggle="tab" data-bs-target="#june" type="button" role="tab">
+                    Juni
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="july-tab" data-bs-toggle="tab" data-bs-target="#july" type="button" role="tab">
+                    Juli
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="august-tab" data-bs-toggle="tab" data-bs-target="#august" type="button" role="tab">
+                    August
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="september-tab" data-bs-toggle="tab" data-bs-target="#september" type="button" role="tab">
+                    September
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="october-tab" data-bs-toggle="tab" data-bs-target="#october" type="button" role="tab">
+                    Oktober
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="november-tab" data-bs-toggle="tab" data-bs-target="#november" type="button" role="tab">
+                    November
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="december-tab" data-bs-toggle="tab" data-bs-target="#december" type="button" role="tab">
+                    Dezember
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="data-import-tab" data-bs-toggle="tab" data-bs-target="#data-import" type="button" role="tab">
+                    <i class="bi bi-upload"></i> Datenimport
+                </button>
+            </li>
+        </ul>
+        
+        <!-- Tab Inhalte -->
+        <div class="tab-content" id="yearTabsContent">
+            <!-- Jahresübersicht Tab -->
+            <div class="tab-pane fade show active" id="year-summary" role="tabpanel" aria-labelledby="year-summary-tab">
+                <div class="row mb-4" id="year-summary-cards">
+                    <!-- Jahreskennzahlen werden durch JavaScript geladen -->
+                </div>
+                
+                <!-- Diagramm für Gleitzeitentwicklung -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card summary-card">
+                            <div class="card-header bg-dark text-white">
+                                <i class="bi bi-graph-up"></i> Gleitzeit-Entwicklung 2026
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="annualChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tabelle mit Monatszusammenfassung -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card summary-card">
+                            <div class="card-header bg-secondary text-white">
+                                <i class="bi bi-table"></i> Monatliche Übersicht 2026
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover annual-summary-table" id="annual-summary-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Monat</th>
+                                                <th>Sollzeit</th>
+                                                <th>Arbeitszeit</th>
+                                                <th>Differenz</th>
+                                                <th>Monats-Gleitzeit</th>
+                                                <th>Kumulierte Gleitzeit</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="annual-summary-body">
+                                            <!-- Daten werden durch JavaScript geladen -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Monatstabs werden dynamisch durch JavaScript geladen -->
+            <div class="tab-pane fade" id="january" role="tabpanel" aria-labelledby="january-tab">
+                <div class="month-content" id="january-content">
+                    <!-- Januar-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="february" role="tabpanel" aria-labelledby="february-tab">
+                <div class="month-content" id="february-content">
+                    <!-- Februar-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="march" role="tabpanel" aria-labelledby="march-tab">
+                <div class="month-content" id="march-content">
+                    <!-- März-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="april" role="tabpanel" aria-labelledby="april-tab">
+                <div class="month-content" id="april-content">
+                    <!-- April-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="may" role="tabpanel" aria-labelledby="may-tab">
+                <div class="month-content" id="may-content">
+                    <!-- Mai-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="june" role="tabpanel" aria-labelledby="june-tab">
+                <div class="month-content" id="june-content">
+                    <!-- Juni-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="july" role="tabpanel" aria-labelledby="july-tab">
+                <div class="month-content" id="july-content">
+                    <!-- Juli-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="august" role="tabpanel" aria-labelledby="august-tab">
+                <div class="month-content" id="august-content">
+                    <!-- August-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="september" role="tabpanel" aria-labelledby="september-tab">
+                <div class="month-content" id="september-content">
+                    <!-- September-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="october" role="tabpanel" aria-labelledby="october-tab">
+                <div class="month-content" id="october-content">
+                    <!-- Oktober-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="november" role="tabpanel" aria-labelledby="november-tab">
+                <div class="month-content" id="november-content">
+                    <!-- November-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="december" role="tabpanel" aria-labelledby="december-tab">
+                <div class="month-content" id="december-content">
+                    <!-- Dezember-Inhalt wird durch JavaScript geladen -->
+                </div>
+            </div>
+            
+            <!-- Datenimport Tab -->
+            <div class="tab-pane fade" id="data-import" role="tabpanel" aria-labelledby="data-import-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card summary-card">
+                            <div class="card-header bg-primary text-white">
+                                <i class="bi bi-upload"></i> Datenimport-Anleitung
+                            </div>
+                            <div class="card-body">
+                                <h5>So importieren Sie neue Daten:</h5>
+                                <ol>
+                                    <li>Öffnen Sie die Datei <code>data.js</code> in einem Texteditor</li>
+                                    <li>Aktualisieren Sie die Datenstruktur mit Ihren Excel-Daten</li>
+                                    <li>Speichern Sie die Datei und laden Sie diese Seite neu</li>
+                                </ol>
+                                
+                                <div class="alert alert-warning mt-3">
+                                    <h6><i class="bi bi-exclamation-triangle"></i> Datenstruktur für einen Monat:</h6>
+                                    <pre><code>{
+    monthName: "Januar",
+    year: 2026,
+    sollzeit: "112:00",
+    arbeitszeit: "110:15",
+    gleitzeit: "-1:45",
+    differenz: "-1:45",
+    tage: [
+        {
+            datum: "01.01 Fr",
+            kommeGest: "11:00",
+            kommeGer: "11:00",
+            kommeBew: "11:00",
+            geheGest: "19:00",
+            geheGer: "19:00",
+            geheBew: "19:00",
+            abwesenheit: "",
+            azProfil: "24 Stunden Woche (mo,di,mi)",
+            pause: "0:30",
+            sollzeit: "8:00",
+            arbeitszeit: "7:30",
+            gleitzeitTag: "-0:30",
+            gleitzeitMonat: "-0:30",
+            gleitzeitGesamt: "-0:30",
+            feiertag: false,
+            keinArbeitstag: false
+        }
+        // Weitere Tage hier einfügen
+    ]
+}</code></pre>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <h5><i class="bi bi-clipboard-data"></i> Schnelldaten-Editor:</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="month-select" class="form-label">Monat auswählen:</label>
+                                                <select class="form-select" id="month-select">
+                                                    <option value="january">Januar</option>
+                                                    <option value="february">Februar</option>
+                                                    <option value="march">März</option>
+                                                    <option value="april">April</option>
+                                                    <option value="may">Mai</option>
+                                                    <option value="june">Juni</option>
+                                                    <option value="july">Juli</option>
+                                                    <option value="august">August</option>
+                                                    <option value="september">September</option>
+                                                    <option value="october">Oktober</option>
+                                                    <option value="november">November</option>
+                                                    <option value="december">Dezember</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="sollzeit-input" class="form-label">Sollzeit (hh:mm):</label>
+                                                <input type="text" class="form-control" id="sollzeit-input" value="112:00">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success" id="update-data-btn">
+                                        <i class="bi bi-check-circle"></i> Aktuelle Daten speichern
+                                    </button>
+                                    <button class="btn btn-info ms-2" id="load-sample-btn">
+                                        <i class="bi bi-download"></i> Beispieldaten laden
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer text-center">
+            <p>Gleitzeit-Dashboard für Siun Diefenbach - Jahr 2026 | 24-Stunden-Woche (Montag, Dienstag, Mittwoch)</p>
+            <p>Daten werden dynamisch aus der <code>data.js</code>-Datei geladen</p>
+            <p>Erstellt mit Bootstrap 5 und Chart.js | <i class="bi bi-calendar-range"></i> Jahresansicht 2026</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Daten-Datei -->
+    <script src="data.js"></script>
+    
+    <!-- Eigene JavaScript-Datei -->
+    <script src="script.js"></script>
+</body>
+</html>
