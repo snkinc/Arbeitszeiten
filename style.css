@@ -178,3 +178,37 @@ body {
     height: 300px;
     margin-bottom: 2rem;
 }
+
+/* Filter-Button Styling */
+.filter-btn {
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Tabellen-Styling */
+.table-hover tbody tr:hover {
+    transform: scale(1.01);
+    transition: transform 0.1s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Status-Badges */
+.badge {
+    font-size: 0.75em;
+    padding: 4px 8px;
+}
+
+/* Responsive Design für Filter-Buttons */
+@media (max-width: 768px) {
+    .btn-group {
+        flex-wrap: wrap;
+    }
+    .filter-btn {
+        margin-bottom: 5px;
+        font-size: 0.9em;
+    }
+}
