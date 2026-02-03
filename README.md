@@ -1,4 +1,28 @@
 # Gleitzeit-Dashboard für Siun Diefenbach - Jahr 2026 (Anpassbar)
+SO FUNKTIONIERT DER WORKFLOW:
+
+1. Du hast Excel-Datei für Februar 2026
+   ↓
+2. Exportierst als JSON (z.B. `februar_data.json`)
+   ↓
+3. FÜHRST convert.js AUS: node convert.js
+   ↓
+4. convert.js erzeugt NEUE data.js
+   ↓
+5. Du lädst data.js auf GitHub hoch
+   ↓
+6. Dashboard zeigt neue Daten an
+
+
+----------------------------
+C:\dein-projekt-ordner\
+├── index.html           # Wird im Browser geladen
+├── style.css           # Wird im Browser geladen
+├── data.js             # Wird im Browser geladen (VON convert.js ERSTELLT!)
+├── script.js           # Wird im Browser geladen
+├── convert.js          # WIRD NUR LOKAL BENUTZT!
+└── temp\
+    └── excel_data.json # Excel-Export (temporär)
 
 Ich habe das Dashboard für das Jahr 2026 aktualisiert und eine strukturierte Datenhaltung implementiert, die einfach erweiterbar ist. Hier ist der aktualisierte Code:
 
