@@ -1,5 +1,12 @@
 // Haupt-JavaScript für das Gleitzeit-Dashboard 2026 - 24-Stunden-Woche
 
+console.log("Script.js wird geladen...");
+console.log("YearData verfügbar?", typeof yearData !== 'undefined');
+if (yearData) {
+    console.log("Anzahl Monate:", Object.keys(yearData.months).length);
+    console.log("Januar Tage:", yearData.months.january?.tage?.length || 0);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Dashboard initialisieren
     initDashboard();
@@ -34,7 +41,65 @@ function initDashboard() {
     loadMonthData('december');
     
     // Diagramm erstellen
-    createAnnualChart();
+    //createAnnualChart();
+    // Ersetze die createAnnualChart() Funktion mit dieser einfacheren Version:
+
+function createAnnualChart() {
+    try {
+        console.log("Diagramm wird erstellt...");
+        
+        const months = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+        const monthData = [];
+        const cumulativeData = [];
+        let cumulative = 0;
+        
+        // Daten für Diagramm sammeln
+        Object.values(yearData.months).forEach(month => {
+            console.log(`Monat ${month.monthName}: ${month.gleitzeit}`);
+            const minutes = parseTimeToMinutes(month.gleitzeit);
+            monthData.push(minutes / 60);
+            cumulative += minutes;
+            cumulativeData.push(cumulative / 60);
+        });
+        
+        console.log("Diagramm-Daten:", monthData);
+        
+        const ctx = document.getElementById('annualChart');
+        if (!ctx) {
+            console.error('Canvas-Element nicht gefunden!');
+            return;
+        }
+        
+        // Bestehendes Diagramm entfernen
+        if (window.annualChartInstance) {
+            window.annualChartInstance.destroy();
+        }
+        
+        window.annualChartInstance = new Chart(ctx.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Monatliche Gleitzeit',
+                    data: monthData,
+                    backgroundColor: monthData.map(v => v >= 0 ? '#27ae60' : '#e74c3c'),
+                    borderColor: monthData.map(v => v >= 0 ? '#229954' : '#c0392b'),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true }
+                }
+            }
+        });
+        
+        console.log("Diagramm erfolgreich erstellt");
+    } catch (error) {
+        console.error("Fehler beim Erstellen des Diagramms:", error);
+    }
+}
     
     // Event-Listener für Tabs hinzufügen
     setupTabListeners();
